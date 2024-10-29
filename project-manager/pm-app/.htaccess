@@ -1,0 +1,11 @@
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /GestionServicios/apps/personal/
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /GestionServicios/apps/personal/index.html [L]
+</IfModule>
