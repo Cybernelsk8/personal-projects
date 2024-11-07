@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained();
             $table->foreignId('status_id')->constrained()->default(1);
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('task_id')->nullable()->constrained();
             $table->timestamps();
             $table->dateTime('deleted_at')->nullable();
         });

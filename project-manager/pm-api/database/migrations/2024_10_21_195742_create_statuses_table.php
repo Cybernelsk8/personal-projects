@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name',80);
+            $table->string('icon',45);
+            $table->string('color',80);
             $table->dateTime('deleted_at')->nullable();
         });
     }

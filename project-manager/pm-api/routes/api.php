@@ -20,25 +20,25 @@ Route::prefix('auth')->group(function(){
 
 Route::get('users',[UserController::class,'index'])->middleware(['JwtAuth']);
 
-Route::middleware(['JwtAuth'])->prefix('pm')->group(function() {
+Route::prefix('pm')->group(function() {
 
-    Route::prefix('projects')->group(function() {
+    Route::middleware(['JwtAuth'])->prefix('projects')->group(function() {
         Route::get('index/{id?}',[ProjectController::class,'index']);
         Route::post('store',[ProjectController::class,'store']);
         Route::put('update/{project}',[ProjectController::class,'update']);
         Route::delete('destroy/{project}',[ProjectController::class,'destroy']);
     });
 
-    Route::prefix('tasks')->group(function() {
+    Route::middleware(['JwtAuth'])->prefix('tasks')->group(function() {
         Route::get('index/{id?}',[TaskController::class,'index']);
-        Route::get('for-user',[TaskController::class,'tasksUser']);
+        Route::get('tasks-by-status/{project_id}',[TaskController::class,'tasksByStatus']);
         Route::post('store',[TaskController::class,'store']);
-        Route::post('store/project-tasks',[TaskController::class,'storeProjectTasks']);
+
         Route::put('update/{project}',[TaskController::class,'update']);
         Route::delete('destroy/{project}',[TaskController::class,'destroy']);
     });
 
-    Route::prefix('statuses')->group(function() {
+    Route::middleware(['JwtAuth'])->prefix('statuses')->group(function() {
         Route::get('index/',[StatusController::class,'index']);
         Route::get('show/{id}',[StatusController::class,'show']);
         Route::get('tasks-user',[StatusController::class,'taskForUser']);

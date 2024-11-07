@@ -23,18 +23,29 @@ class ProjectController extends Controller
         }
     }
 
+    public function projectsByUser() {
+        try {
+
+        } catch (\Throwable $th) {
+            return response($th->getMessage());
+        }
+    }
+
     public function store( Request $request) {
         $request->validate([
             'title' => 'required|string',
+            'description' => 'string|max:255'
         ]);
 
         try {
             $project = Project::create([
                 'title' => ucwords(strtolower($request->title)),
                 'description' => trim($request->description ?? ''),
+                'user_id' => auth()->user()->id
             ]);
 
-            return response($project);
+            return response('Project created successfully =)');
+            
 
         } catch (\Throwable $th) {
             return response($th->getMessage());
@@ -44,6 +55,7 @@ class ProjectController extends Controller
     public function update( Project $project, Request $request) {
         $request->validate([
             'title' => 'required|string',
+            'description' => 'string|max:255'
         ]);
 
         try {

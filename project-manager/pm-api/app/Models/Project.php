@@ -9,6 +9,7 @@ class Project extends Model
     protected $fillable = [
         'title',
         'description',
+        'user_id'
     ];
 
     //RELATIONS
@@ -17,4 +18,7 @@ class Project extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function image() {
+        return $this->morphOne(Image::class,'imageable');
+    }
 }
