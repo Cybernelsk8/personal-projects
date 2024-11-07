@@ -8,7 +8,8 @@
             type : String,
             default : ''
         },
-        icon : ''
+        icon : '',
+
     })
     defineOptions({
         inheritAttrs: false

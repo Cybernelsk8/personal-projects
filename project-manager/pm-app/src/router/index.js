@@ -14,25 +14,18 @@ const router = createRouter({
 			component: Layout,
 			children: [
 				{
-					path: 'home',
-					name: 'Home',
-					component: () => import('../views/Home.vue'),
+					path: 'projects',
+					name: 'Projects',
+					component: () => import('../views/Projects.vue'),
 					meta: {
 						auth : true
 					}
 				},
 				{
-					path: 'to-do-list',
-					name: 'To Do List',
-					component: () => import('../views/ToDoList.vue'),
-					meta: {
-						auth : true
-					}
-				},
-				{
-					path: 'kamban',
+					path: 'kamban/:project_id',
 					name: 'Kamban',
 					component: () => import('../views/Kamban.vue'),
+					props : true,
 					meta: {
 						auth : true
 					}
@@ -73,7 +66,10 @@ const router = createRouter({
 router.beforeEach((to, from) => {
 
 	const auth = useAuthStore()
-	
+	if(!localStorage.getItem('key') && to.name != 'Login'){
+		return { name : 'Login'}
+	}
+
 	if (to.meta.auth) {
 
 		const hasPermission = auth.user;

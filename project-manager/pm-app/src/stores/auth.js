@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
 		axios.post('auth/login',user.value)
 		.then(response => {
 			user.value = response.data
-			router.push({ name: 'Home' })
+			router.push({ name: 'Projects' })
 		})
 		.catch(error => {
 			if(error.response.data.errors) {
@@ -45,6 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
 	const resetData = () => {
 		user.value = {}
 		errors.value = []
+		localStorage.clear()
 	}
 
 	const logout = () => {
@@ -71,6 +72,15 @@ export const useAuthStore = defineStore('auth', () => {
 		return false;
 	}
 
+	function generateKey() {
+		const caracteres = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ.,;:}{-+¿?¡¨*][abcdefghijñklmnopqrstuvwxyz0123456789';
+		let cadenaAleatoria = '';
+		for (let i = 0; i < 64; i++) {
+			cadenaAleatoria += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+		}
+		return cadenaAleatoria;
+	}
+
 	return {
 		user,
  
@@ -81,5 +91,6 @@ export const useAuthStore = defineStore('auth', () => {
 		logout,
 		validateAuth,
 		checkPermission,
+		generateKey,
 	}
 })

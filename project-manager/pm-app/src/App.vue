@@ -7,7 +7,10 @@
 	const auth = useAuthStore()
 	const global = useGlobalStore()
 
-	onMounted(() => auth.validateAuth())
+	onMounted(() => {
+		localStorage.setItem('key',btoa(auth.generateKey()))
+		auth.validateAuth()
+	})
 	
 </script>
 
