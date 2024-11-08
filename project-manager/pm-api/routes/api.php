@@ -24,6 +24,7 @@ Route::prefix('pm')->group(function() {
 
     Route::middleware(['JwtAuth'])->prefix('projects')->group(function() {
         Route::get('index/{id?}',[ProjectController::class,'index']);
+        Route::get('projects-by-user',[ProjectController::class,'projectsByUser']);
         Route::post('store',[ProjectController::class,'store']);
         Route::put('update/{project}',[ProjectController::class,'update']);
         Route::delete('destroy/{project}',[ProjectController::class,'destroy']);

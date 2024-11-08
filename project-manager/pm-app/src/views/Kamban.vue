@@ -13,6 +13,10 @@
 </script>
 
 <template>
+    <div v-if="store.loading.index" class="relative">
+        <Loading-Bar color="bg-violet-500 absolute" />
+        <br>
+    </div>
     <div class="flex gap-4 justify-evenly">
         <Card v-for="status in store.tasksByStatus" class="bg-slate-900 p-5 w-96">
             <template #header>
@@ -28,7 +32,7 @@
             </template>
 
             <div class="h-full">
-                <draggable v-model="status.tasks" tag="ul" group="store.statuses" :animation="300" class="h-full">
+                <draggable v-model="status.tasks" :itemKey="item =>item.id" tag="ul" group="store.statuses" :animation="300" class="h-full">
                     <template #item="{element : task}">
                         <div class="py-4">
                             <Card class="bg-gray-700 p-3 text-gray-400 cursor-move">

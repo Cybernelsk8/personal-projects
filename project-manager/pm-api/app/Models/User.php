@@ -51,4 +51,18 @@ class User extends Authenticatable
     public function getInicialAttribute() {
         return $this->name[0];
     }
+
+    public function projectsCreated() {
+        return $this->hasMany(Project::class);
+    }
+
+    public function  tasks() {
+        return $this->hasMany(Task::class);
+    }
+
+    public function projectsWithAssignedTasks() {
+        return Project::whereHas('tasks',function ($query) {
+            $query->where('user_id',$this->id);
+        });
+    }
 }

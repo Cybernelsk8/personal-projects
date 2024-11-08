@@ -41,6 +41,12 @@ class DatabaseSeeder extends Seeder
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore accusantium vel deserunt nemo nam aliquam aliquid obcaecati vero esse impedit aperiam ab molestiae debitis, ratione facilis non eveniet, officiis quam?',
             'user_id' => 2
         ]);
+        
+        Project::create([
+            'title' => 'Project example 3',
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore accusantium vel deserunt nemo nam aliquam aliquid obcaecati vero esse impedit aperiam ab molestiae debitis, ratione facilis non eveniet, officiis quam?',
+            'user_id' => 2
+        ]);
 
         Status::create([
             'name' => 'Pending',

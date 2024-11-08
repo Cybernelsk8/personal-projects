@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -25,6 +26,12 @@ class ProjectController extends Controller
 
     public function projectsByUser() {
         try {
+            
+            $user = User::find(auth()->user()->id);
+            $projectsCreated = $user->projectsCreated();
+            $projectsWithAssignedTasks = $user->projectsWithAssignedTasks();
+            $projects = $projectsCreated->union($projectsWithAssignedTasks)->get();
+            return response($projects);
 
         } catch (\Throwable $th) {
             return response($th->getMessage());
